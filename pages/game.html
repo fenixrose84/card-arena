@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Arena: Sunset fantasy</title>
+    <base href="/card-arena/">
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="vendor/bootstrap-icons-1.13.1/bootstrap-icons.min.css" rel="stylesheet" />
+    <script src="vendor/canvas-confetti-1.9.3/confetti.browser.min.js" defer></script>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/game.css" />
+    <script src="js/constants.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/game.js" defer></script>
+    <script src="js/toast.js" defer></script>
+  </head>
+  <body class="dark-theme">
+    <div class="app container">
+      <header class="navbar"></header>
+
+      <main>
+        <div class="battle-zone">
+          <!-- Player Side -->
+          <div class="slots player-side">
+            <div class="slot empty" data-player-slot="0"></div>
+            <div class="slot empty" data-player-slot="1"></div>
+            <div class="slot empty" data-player-slot="2"></div>
+          </div>
+
+          <!-- AI Side -->
+          <div class="slots enemy-side">
+            <div class="slot" data-enemy-slot="0"></div>
+            <div class="slot" data-enemy-slot="1"></div>
+            <div class="slot" data-enemy-slot="2"></div>
+          </div>
+        </div>
+
+        <div class="controls-bar">
+          <div class="cost-display"><img src="assets/images/icons/lightning-spell.png"> -/-</div>
+          <button id="btn-auto-fill">🎲 Auto Draft</button>
+          <button id="btn-clear">🔄 Clear Slots</button>
+
+          <button id="btn-start" class="battle-btn" disabled>⚔️ START BATTLE</button>
+        </div>
+
+        <div class="hand-cards" id="player-hand"></div>
+      </main>
+
+      <div class="modal-overlay" id="end-modal">
+        <div class="modal-content">
+          <div class="modal-title" id="modal-title">VICTORY!</div>
+          <div class="modal-desc" id="modal-desc">You wiped out the opponent forces!</div>
+          <button class="button" onclick="changePage('main-menu')">Home</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

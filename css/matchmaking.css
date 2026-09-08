@@ -1,0 +1,112 @@
+.matchmaking-screen {
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 10px;
+}
+
+.panel-content {
+  display: none;
+}
+
+.panel-content.active {
+  display: block;
+}
+
+.main-panel {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.main-panel h1 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: #38bdf8;
+}
+
+.main-panel p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.name-input {
+  padding: 5px;
+  border-radius: 4px;
+}
+
+/* Matchmaking Spinner */
+.main-panel .spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #334155;
+  border-top: 4px solid #38bdf8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+/* Match Showcase Layout */
+.main-panel .showcase {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24px 0;
+  background: #0f172a;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #334155;
+}
+
+.main-panel .player-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 40%;
+  text-align: center;
+}
+
+.main-panel .avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.main-panel .player-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #f8fafc;
+}
+
+.main-panel .player-rank {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.main-panel .vs-badge {
+  font-weight: 900;
+  color: #ef4444;
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

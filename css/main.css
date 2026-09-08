@@ -1,0 +1,127 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333;
+  --border-color: rgba(0, 0, 0, 0.5);
+  --label-color: #eee;
+  --red: #f44336;
+  --green: #4caf50;
+  --blue: #3f51b5;
+  --lightblue: #2196f3;
+  --overlay-gradient: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+}
+
+.dark-theme {
+  --bg-color: #222;
+  --text-color: #eee;
+  --border-color: rgba(255, 255, 255, 0.5);
+  --label-color: #333;
+  --overlay-gradient: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  border: none;
+  text-decoration: none;
+  line-height: 1;
+  user-select: none;
+}
+
+img {
+  object-fit: contain;
+}
+
+button {
+  cursor: pointer;
+}
+
+.button {
+  display: inline-block;
+  padding: 8px 16px;
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.truncated {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  background-image: radial-gradient(circle at 50% 15%, rgba(59, 130, 246, 0.12) 0%, transparent 50%), radial-gradient(circle at 50% 85%, rgba(239, 68, 68, 0.12) 0%, transparent 50%);
+}
+
+.container {
+  max-width: 576px;
+  margin: auto;
+}
+
+.app {
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.toast-container {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+}
+
+.toast {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 5px;
+  width: max-content;
+  max-width: 100%;
+}
+
+/* Medium screens (Tablets, up to 768px wide) */
+@media (max-width: 768px) {
+}
+
+/* Small screens (Phones, up to 480px wide) */
+@media (max-width: 480px) {
+}

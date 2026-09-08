@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Arena: Sunset fantasy</title>
+    <base href="/card-arena/" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="vendor/bootstrap-icons-1.13.1/bootstrap-icons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/main-menu.css" />
+    <script src="js/constants.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/main-menu.js" defer></script>
+    <script src="js/toast.js" defer></script>
+  </head>
+  <body class="dark-theme">
+    <div class="app container">
+      <header class="navbar">
+        <div class="logo">
+          <img src="assets/images/logo.png" />
+          Card Arena
+        </div>
+
+        <div class="profile-display" onclick="toggleModal('profile-modal')">
+          <div class="avatar">
+            <img src="assets/images/avatars/0.png" />
+            <div class="level-badge">42</div>
+          </div>
+          <div class="info">
+            <span class="name">Archmage_Valen</span>
+            <div class="xp-bar">
+              <div class="fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="currency-display">
+          <div class="item">
+            <img src="assets/images/icons/crown-coin.png" />
+            <span>14,250</span>
+            <button>
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+          <div class="item">
+            <img src="assets/images/icons/diamond.png" />
+            <span>1,850</span>
+            <button>
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+          <div class="item">
+            <img src="assets/images/icons/purple-crystal.png" />
+            <span>3,400</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button onclick="toggleModal('quests-modal')">
+            <img src="assets/images/icons/scroll.png" />
+            <span class="badge-dot"></span>
+          </button>
+          <button onclick="toggleModal('settings-modal')">
+            <img src="assets/images/icons/settings-gear.png" />
+          </button>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <!-- Menu Navigation Column -->
+        <nav class="navigation-menu">
+          <button class="item" onclick="toggleModal('play-modal')">
+            <i class="bi bi-play-fill"></i>
+            <div class="item-text">
+              <span class="title">Play Duel</span>
+              <span class="subtitle">Ranked, Casual, Solo</span>
+            </div>
+          </button>
+
+          <button class="item" onclick="toggleModal('collection-modal')">
+            <i class="bi bi-box-fill"></i>
+            <div class="item-text">
+              <span class="title">Collection</span>
+              <span class="subtitle">Decks & Card Library</span>
+            </div>
+          </button>
+
+          <button class="item" onclick="toggleModal('shop-modal')">
+            <i class="bi bi-shop-window"></i>
+            <div class="item-text">
+              <span class="title">Emporium</span>
+              <span class="subtitle">Packs, Skins, Offerings</span>
+            </div>
+          </button>
+
+          <button class="item" onclick="toggleModal('quests-modal')">
+            <i class="bi bi-trophy-fill"></i>
+            <div class="item-text">
+              <span class="title">Battle Pass</span>
+              <span class="subtitle">Quests & Rewards</span>
+            </div>
+          </button>
+
+          <button class="item" onclick="toggleModal('settings-modal')">
+            <i class="bi bi-sliders2"></i>
+            <div class="item-text">
+              <span class="title">Settings</span>
+              <span class="subtitle">Audio, Display & Controls</span>
+            </div>
+          </button>
+        </nav>
+
+        <!-- Center Showcase Spotlight -->
+        <section class="showcase">
+          <div class="banner">
+            <div class="subtitle">Season 4: Frostfire Awakening</div>
+            <h1 class="title">AETHERIA</h1>
+          </div>
+
+          <div class="deck-widget">
+            <div class="artwork">
+              <img src="assets/images/decks/volcano-deck.png" />
+            </div>
+            <div class="info">
+              <span class="label">Active Deck</span>
+              <span class="title">Pyromancer Realm</span>
+              <div class="stats">
+                <span><i class="fa-solid fa-layer-group"></i> 30/30</span>
+                <span><i class="fa-solid fa-bolt"></i> Avg Cost: 3.4</span>
+              </div>
+            </div>
+            <i class="fa-solid fa-arrows-rotate" style="color: var(--text-muted); margin-left: 1rem"></i>
+          </div>
+        </section>
+
+        <aside class="sidebar">
+          <div class="news-widget" style="background-image: url(assets/images/sceneries/dark-tower.jpg)">
+            <span class="news-tag">Expansion Update</span>
+            <h3 class="title">Shadows over Astral Realm</h3>
+            <p class="desc">Discover 85 new cards, mythic spells, and dynamic battlefield events!</p>
+          </div>
+
+          <div class="quests-panel">
+            <div class="header">
+              <div class="title">
+                <i class="bi bi-calendar-check"></i>
+                <span>Daily Quests</span>
+              </div>
+              <span class="reset-label">Reset in 14h</span>
+            </div>
+
+            <div class="item">
+              <div class="info">
+                <span class="name">Play 5 Fire Spells</span>
+                <span class="reward"><i class="bi bi-coin"></i> +350</span>
+              </div>
+              <div class="progress-bar">
+                <div class="fill" style="width: 80%"></div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="info">
+                <span class="name">Win 3 Ranked Matches</span>
+                <span class="reward"><i class="bi bi-gem"></i> +50</span>
+              </div>
+              <div class="progress-bar">
+                <div class="fill" style="width: 33%"></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <!-- Play Modes Modal -->
+    <div class="play-modal modal hidden" onclick="toggleModal('play-modal')">
+      <div class="modal-content" onclick="stopPropagation(event)">
+        <div class="modal-header">
+          <div class="title"><img src="assets/images/icons/crossed-swords.png" /> Select Battle Mode</div>
+          <button class="close-btn" onclick="toggleModal('play-modal')"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="modal-body mode-list">
+          <div class="item" onclick="changePage('matchmaking')" style="background-image: url(assets/images/sceneries/medieval-castle.jpg)">
+            <i class="bi bi-trophy-fill"></i>
+            <h3 class="title">Ranked Duel</h3>
+            <p class="desc">Climb the ladder ranks, earn seasonal rewards and competitive prestige.</p>
+          </div>
+
+          <div class="item" onclick="changePage('matchmaking')" style="background-image: url(assets/images/sceneries/harbor-city.jpg)">
+            <i class="bi bi-dice-3-fill"></i>
+            <h3 class="title">Casual Match</h3>
+            <p class="desc">Test new deck builds without rank penalties in fast-paced matches.</p>
+          </div>
+
+          <div class="item" onclick="changePage('matchmaking')" style="background-image: url(assets/images/sceneries/forest-ruins.jpg)">
+            <i class="bi bi-bookmark-fill"></i>
+            <h3 class="title">Solo Campaign</h3>
+            <p class="desc">Embark on story-driven adventures and unlock exclusive elemental cards.</p>
+          </div>
+
+          <div class="item" onclick="changePage('matchmaking')" style="background-image: url(assets/images/sceneries/mystical-portal.jpg)">
+            <i class="bi bi-magic"></i>
+            <h3 class="title">Draft Arena</h3>
+            <p class="desc">Draft a random deck on the fly and fight for high-tier chest rewards.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card Collection Modal -->
+    <div class="collection-modal modal hidden" onclick="toggleModal('collection-modal')">
+      <div class="modal-content" onclick="stopPropagation(event)">
+        <div class="modal-header">
+          <div class="title"><img src="assets/images/icons/backpack.png" /> Card Collection</div>
+          <button class="close-btn" onclick="toggleModal('collection-modal')"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="modal-body items-grid"></div>
+      </div>
+    </div>
+
+    <!-- Shop Modal -->
+    <div class="shop-modal modal hidden" onclick="toggleModal('shop-modal')">
+      <div class="modal-content" onclick="stopPropagation(event)">
+        <div class="modal-header">
+          <div class="title"><img src="assets/images/icons/treasure-chest.png" /> Mythic Emporium</div>
+          <button class="close-btn" onclick="toggleModal('shop-modal')"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="modal-body items-grid">
+          <div class="item" style="background-image: url(assets/images/sceneries/sea-monster.jpg)">
+            <img src="assets/images/decks/castle-deck.png" class="icon" />
+            <h3 class="title">Frostfire Booster</h3>
+            <p class="desc">Contains 5 cards with at least 1 guaranteed Rare or Legendary.</p>
+            <button class="button"><i class="bi bi-coin"></i> 1000 Gold</button>
+          </div>
+
+          <div class="item" style="background-image: url(assets/images/sceneries/moonlit-castle.jpg)">
+            <img src="assets/images/icons/blue-gem.png" class="icon" />
+            <h3 class="title">Arcane Gem Pouch</h3>
+            <p class="desc">Acquire 500 Arcane Gems for cosmetics and special event passes.</p>
+            <button class="button">$4.99 USD</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quests Modal -->
+    <div class="quests-modal modal hidden" onclick="toggleModal('quests-modal')">
+      <div class="modal-content" onclick="stopPropagation(event)">
+        <div class="modal-header">
+          <div class="title"><img src="assets/images/icons/paper-scroll.png" /> Quests & Battle Pass</div>
+          <button class="close-btn" onclick="toggleModal('quests-modal')"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="info-widget">
+            <h3 class="title">Season Pass Progress (Level 18)</h3>
+            <div class="progress-bar">
+              <div class="fill" style="width: 75%"></div>
+            </div>
+          </div>
+
+          <div class="item-list">
+            <div class="item">
+              <div class="info">
+                <span class="name">Play 5 Fire Spells</span>
+                <span class="reward"><i class="bi bi-coin"></i> +350</span>
+              </div>
+              <div class="progress-bar">
+                <div class="fill" style="width: 80%"></div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="info">
+                <span class="name">Win 3 Ranked Matches</span>
+                <span class="reward"><i class="bi bi-gem"></i> +50</span>
+              </div>
+              <div class="progress-bar">
+                <div class="fill" style="width: 33%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="settings-modal modal hidden" onclick="toggleModal('settings-modal')">
+      <div class="modal-content" onclick="stopPropagation(event)">
+        <div class="modal-header">
+          <div class="title"><img src="assets/images/icons/settings-gear.png" /> Game Settings</div>
+          <button class="close-btn" onclick="toggleModal('settings-modal')"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="modal-body item-list">
+          <div class="item">
+            <div class="label-group">
+              <span class="title">Master Volume</span>
+              <span class="desc">Adjust global UI and sound effect volume</span>
+            </div>
+            <input type="range" min="0" max="100" value="80" id="volume-slider" />
+          </div>
+
+          <div class="item">
+            <div class="label-group">
+              <span class="title">Particle Density</span>
+              <span class="desc">Toggle background magical particles</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="item">
+            <div class="label-group">
+              <span class="title">High Quality Shaders</span>
+              <span class="desc">Enable 3D card holographic reflection effects</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile modal -->
+    <div class="profile-modal modal hidden" onclick="toggleModal('profile-modal')">
+      <div class="modal-content" onclick="stopPropagation(event)">
+        <div class="modal-header">
+          <div class="title"><img src="assets/images/icons/settings-gear.png" /> Edit Profile</div>
+          <button class="close-btn" onclick="toggleModal('profile-modal')">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Avatar Selection/Preview -->
+          <label class="avatar-input">
+            <div class="avatar-preview">
+              <img src="assets/images/avatars/0.png" />
+              <div class="avatar-overlay">
+                <i class="bi bi-camera-fill"></i>
+              </div>
+            </div>
+            <input type="file" accept="image/*" hidden />
+          </label>
+
+          <label class="username-input">
+            Username
+            <input type="text" placeholder="Enter username" />
+          </label>
+
+          <label class="bio-input">
+            Bio
+            <textarea rows="3" placeholder="Tell about yourself..."></textarea>
+          </label>
+        </div>
+        <div class="actions">
+          <button class="button" onclick="toggleModal('profile-modal')">Cancel</button>
+          <button class="button" onclick="updateProfile()">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-container hidden"></div>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Arena: Sunset fantasy</title>
+    <base href="/card-arena/" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="vendor/bootstrap-icons-1.13.1/bootstrap-icons.min.css" rel="stylesheet" />
+    <script src="vendor/canvas-confetti-1.9.3/confetti.browser.min.js" defer></script>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/matchmaking.css" />
+    <script src="js/constants.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/matchmaking.js" defer></script>
+    <script src="js/toast.js" defer></script>
+  </head>
+  <body class="dark-theme">
+    <div class="matchmaking-screen container">
+      <div class="main-panel">
+        <div class="panel-content lobby active">
+          <h1>PvP Matchmaking</h1>
+          <p>Enter your player name to search for an opponent.</p>
+          <input type="text" class="name-input" placeholder="Enter Player Name" value="ShadowNinja" />
+          <button class="button" onclick="startSearch()">Find Match</button>
+        </div>
+
+        <div class="panel-content queue">
+          <h1>Searching for Match...</h1>
+          <div class="spinner"></div>
+          <p class="queue-timer">Searching: 0s</p>
+          <button class="button" onclick="changePage('main-menu')">Cancel</button>
+        </div>
+
+        <div class="panel-content players-showcase">
+          <h1 style="color: #22c55e">Match Found!</h1>
+          <p>Opponent connected successfully.</p>
+
+          <div class="showcase"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
