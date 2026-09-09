@@ -6,7 +6,7 @@ let queueInterval;
 let secondsElapsed = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  enemyProfile = generateProfile()
+  enemyProfile = generateEnemyProfile()
   save("enemyProfile", enemyProfile);
 
   renderShowcase();

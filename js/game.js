@@ -2,15 +2,13 @@ const navbar = document.querySelector(".navbar");
 const playerHandEl = document.getElementById("player-hand");
 const playerSlotEls = document.querySelectorAll(".player-side.slots > *");
 const enemySlotEls = document.querySelectorAll(".enemy-side.slots > *");
-const btnStart = document.getElementById("btn-start");
-const btnAuto = document.getElementById("btn-auto-fill");
-const btnClear = document.getElementById("btn-clear");
 const modalOverlay = document.getElementById("end-modal");
 const costDisplay = document.querySelector(".cost-display");
 
 const sceneries = [SCENERIES.medievalCastle, SCENERIES.darkTower, SCENERIES.forestRuins];
 const maxCost = 20;
 
+let isWaiting = false;
 let slotCount = 3;
 let playerHand = [];
 let enemyHand = [];
@@ -20,6 +18,7 @@ let enemySlots = getEmptySlots();
 let totalCost = 0;
 let isBattling = false;
 let battleSpeed = 1000;
+let isConceded = false;
 
 document.addEventListener("DOMContentLoaded", () => {
   initGame();
@@ -59,7 +58,6 @@ function initGame() {
   setEnemyHand();
   autoDraft(true);
 
-  setupEventListeners();
   setTotalCost();
 }
 
@@ -130,10 +128,6 @@ function createCardDOM(card, isEnemy = false, isFlipped = false) {
   return cardEl;
 }
 
-function flipCard(cardEl, force) {
-  cardEl.classList.toggle("flipped", force !== undefined ? !force : undefined);
-}
-
 function renderHand() {
   playerHandEl.innerHTML = "";
   playerHand.forEach((card) => {
@@ -144,7 +138,6 @@ function renderHand() {
   });
 
   const selectedCount = playerSlots.filter(Boolean).length;
-  btnStart.disabled = selectedCount === 0 || isBattling;
 }
 
 function renderPlayerSlots() {
@@ -164,6 +157,8 @@ function renderPlayerSlots() {
 }
 
 async function renderEnemySlots() {
+  isWaiting = true;
+
   const randomCardBack = randomInt(0, 15);
   for (let i = 0; i < slotCount; i++) {
     await sleep(1000);
@@ -187,6 +182,8 @@ async function renderEnemySlots() {
       await sleep(300);
     }
   }
+
+  isWaiting = false;
 }
 
 function handleHandCardClick(card) {
@@ -260,14 +257,11 @@ function clearSlots() {
 }
 
 async function startBattle() {
-  if (isBattling) return;
+  if (isBattling || isWaiting) return;
   const activePlayerCards = playerSlots.filter(Boolean);
   if (activePlayerCards.length === 0) return;
 
   isBattling = true;
-  btnStart.disabled = true;
-  btnAuto.disabled = true;
-  btnClear.disabled = true;
 
   let safetyCounter = 0;
   const MAX_TURNS = 100;
@@ -278,7 +272,7 @@ async function startBattle() {
     const playerAlive = playerSlots.filter((c) => c && !c.isDead);
     const enemyAlive = enemySlots.filter((c) => c && !c.isDead);
 
-    if (playerAlive.length === 0 || enemyAlive.length === 0) {
+    if (isConceded || playerAlive.length === 0 || enemyAlive.length === 0) {
       break;
     }
 
@@ -299,11 +293,11 @@ async function startBattle() {
 
       const checkPlayer = playerSlots.filter((c) => c && !c.isDead);
       const checkEnemy = enemySlots.filter((c) => c && !c.isDead);
-      if (checkPlayer.length === 0 || checkEnemy.length === 0) break;
+      if (isConceded || checkPlayer.length === 0 || checkEnemy.length === 0) break;
     }
   }
 
-  const isWin = playerSlots.filter((c) => c && !c.isDead).length > 0;
+  const isWin = !isConceded && playerSlots.filter((c) => c && !c.isDead).length > 0;
   showEndModal(isWin);
 }
 
@@ -430,19 +424,18 @@ function showEndModal(isWin) {
   } else {
     title.textContent = "💀 DEFEAT!";
     title.className = "modal-title lose";
-    desc.textContent = `Your lineup fell. Redraft your deck and try again!`;
+    desc.textContent = isConceded ? `You conceded the match.` : `Your lineup fell. Redraft your deck and try again!`;
   }
 
   modalOverlay.classList.add("active");
 }
 
-function setupEventListeners() {
-  btnStart.addEventListener("click", startBattle);
-  btnAuto.addEventListener("click", () => autoDraft());
-  btnClear.addEventListener("click", clearSlots);
-}
-
 function getAbility(name) {
   const ability = ABILITIES.filter((ability) => ability.name === name)[0];
   return ability;
+}
+
+function concede() {
+  isConceded = true;
+  showEndModal(false);
 }

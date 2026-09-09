@@ -217,7 +217,7 @@
           <div class="title"><img src="assets/images/icons/backpack.png" /> Card Collection</div>
           <button class="close-btn" onclick="toggleModal('collection-modal')"><i class="bi bi-x-lg"></i></button>
         </div>
-        <div class="modal-body items-grid"></div>
+        <div class="modal-body cards-grid"></div>
       </div>
     </div>
 
@@ -351,7 +351,10 @@
 
           <label class="username-input">
             Username
-            <input type="text" placeholder="Enter username" />
+            <div style="position: relative;">
+              <input type="text" placeholder="Enter username" />
+              <button class="random-btn" onclick="generateUsername()"><i class="bi bi-dice-3-fill"></i></button>
+            </div>
           </label>
 
           <label class="bio-input">

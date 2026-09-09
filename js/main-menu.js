@@ -1,4 +1,4 @@
-const collectionGrid = document.querySelector(".collection-modal .items-grid");
+const collectionGrid = document.querySelector(".collection-modal .cards-grid");
 const avatarInput = document.querySelector(".avatar-input input");
 const avatarPreview = document.querySelector(".avatar-preview img");
 const usernameInput = document.querySelector(".username-input input");
@@ -25,7 +25,7 @@ avatarInput.addEventListener("change", async () => {
 function toggleModal(name, force) {
   const shouldHide = force !== undefined ? !force : undefined;
   const modalEl = document.querySelector(`.modal.${name}`);
-  modalEl.classList.toggle("hidden", force);
+  modalEl.classList.toggle("hidden", shouldHide);
   document.body.classList.toggle("no-scroll", !modalEl.classList.contains("hidden"));
 }
 
@@ -45,19 +45,30 @@ function toggleSetting(element) {
 function displayCollection() {
   collectionGrid.innerHTML = "";
 
-  collectionGrid.innerHTML = CARD_LIBRARY.map((item) => {
-    const itemCost = Math.floor((item.atk + item.hp) / 10);
+  collectionGrid.innerHTML = CARD_LIBRARY.map((card) => {
+    const cost = Math.floor((card.atk + card.hp) / 10);
+    const ability = ABILITIES.find((ability) => ability.name === card.ability);
+
     return `
-      <div class="item ${item.rarity}">
-        <div class="artwork" style="background-image: url('${item.artwork}')"></div>
-        <div class="card-overlay"></div>
-        <div class="card-header">
-            <span class="name truncated">${item.name}</span>
-            <div class="cost">${itemCost}</div>
-        </div>
-        <div class="card-footer">
-          <span>⚔️ ${item.atk}</span>
-          <span>💚 ${item.hp}</span>
+      <div class="card ${card.rarity}" onclick="flipCard(this)">
+        <div class="card-inner">
+          <div class="card-face card-back">
+            <img src="${CARD_BACK_URL}/${card.cardBack || 0}.png">
+          </div>
+          <div class="card-face card-front">
+            <div class="card-header">
+              <span class="card-name truncated">${card.name}</span>
+              <span class="card-cost">⚡${cost}</span>
+            </div>
+            <img class="card-artwork" src="${card.artwork}">
+            <div class="card-footer">
+              ${ability ? `<img class="card-ability" src="${ability.icon}">` : ""}
+              <div class="card-stats">
+                <div class="stat-atk">⚔️ ${card.atk}</div>
+                <div class="stat-hp">💚 ${card.hp}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     `;
@@ -69,20 +80,23 @@ function updateUI() {
   avatarPreview.src = avatar;
   usernameInput.value = playerProfile.username;
   bioInput.value = playerProfile.bio;
+  document.querySelector(".profile-display .name").textContent = playerProfile.username;
   document.querySelector(".profile-display .avatar img").src = avatar;
 }
 
 async function updateProfile() {
   try {
+    const avatar = avatarInput.files[0] ? await getFileDataUrl(avatarInput.files[0]) : playerProfile.avatar;
+
     const newProfile = {
-      avatar: await getFileDataUrl(avatarInput.files[0]),
+      avatar: avatar,
       username: usernameInput.value,
       bio: bioInput.value,
     };
 
     playerProfile = newProfile;
     save("playerProfile", playerProfile);
-    Toast.show("Profile successfully updated");
+    Toast.show("Profile updated successfully");
 
     updateUI();
     toggleModal("profile-modal", false);
@@ -90,4 +104,9 @@ async function updateProfile() {
     console.error(error);
     Toast.show(error);
   }
+}
+
+function generateUsername() {
+  const usernames = USERNAMES.slice(0, 7).filter((item) => item !== usernameInput.value);
+  usernameInput.value = getRandomItem(usernames);
 }

@@ -229,4 +229,20 @@ const ABILITIES = [
 const AVATARS_URL = "assets/images/avatars";
 const CARD_BACK_URL = "assets/images/card-backs";
 
-const USERNAMES = ["CyberViper", "DoomSlayer", "Valkyrie", "GhostRider", "ApexPredator"];
+const USERNAMES = [
+  "CyberViper",
+  "DoomSlayer",
+  "ApexPredator",
+  "ShadowBlade",
+  "PixelPhantom",
+  "NeonSpecter",
+  "IronRogue",
+  "VoidWalker",
+  "StormBreaker",
+  "FrostByte",
+  "ChaosKnight",
+  "BlazeRunner",
+  "QuantumHunter",
+  "GhostProtocol",
+  "VortexRider",
+];

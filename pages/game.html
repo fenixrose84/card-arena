@@ -39,10 +39,11 @@
 
         <div class="controls-bar">
           <div class="cost-display"><img src="assets/images/icons/lightning-spell.png"> -/-</div>
-          <button id="btn-auto-fill">🎲 Auto Draft</button>
-          <button id="btn-clear">🔄 Clear Slots</button>
+          <button onclick="autoDraft()">🎲 Auto Draft</button>
+          <button onclick="clearSlots()">🔄 Clear Slots</button>
+          <button onclick="concede()">❌ Concede</button>
 
-          <button id="btn-start" class="battle-btn" disabled>⚔️ START BATTLE</button>
+          <button class="battle-btn" onclick="startBattle()">⚔️ START BATTLE</button>
         </div>
 
         <div class="hand-cards" id="player-hand"></div>
